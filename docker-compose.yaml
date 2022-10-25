@@ -1,0 +1,115 @@
+version: "3.9"
+services:
+  adguardhome:
+    image: adguard/adguardhome
+    container_name: adguardhome
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+      - 784:784/udp
+      - 853:853/tcp
+      - 3000:3000/tcp
+      - 3030:80/tcp
+      - 443:443/tcp
+    volumes:
+      - ./adguard/workdir:/opt/adguardhome/work
+      - ./adguard/confdir:/opt/adguardhome/conf
+    restart: always
+
+  mosquitto:
+    container_name: mosquitto
+    image: eclipse-mosquitto:latest
+    restart: always
+    volumes:
+      - ./mosquitto/config:/mosquitto/config
+      - ./mosquitto/data:/mosquitto/data
+      - ./mosquitto/log:/mosquitto/log
+    ports:
+      - 1883:1883
+      - 9001:9001
+
+
+  zigbee2mqtt:
+    container_name: zigbee2mqtt
+    image: koenkk/zigbee2mqtt:latest # x86_64/amd64
+    restart: always
+    volumes:
+      - ./z2m:/app/data
+    devices:
+      - /dev/serial/by-id/usb-1a86_USB_Serial-if00-port0:/dev/ttyACM0
+    user: "1000:20"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mosquitto
+      
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: "main"
+      POSTGRES_USER: "oleg"
+      POSTGRES_PASSWORD: "542402"
+      PGDATA: "/data/postgres"
+    volumes:
+      - ./postgres/Init Database:/docker-entrypoint-initdb.d
+      - ./postgres/:/data/postgres  
+    ports:
+      - 5432:5432
+
+
+  adminer:
+    image: dehy/adminer
+    restart: always
+    ports:
+      - 8081:80
+    depends_on:
+      - postgres
+      
+  transmission:
+    image: lscr.io/linuxserver/transmission
+    container_name: transmission
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Moscow
+      - TRANSMISSION_WEB_HOME=/combustion-release/ #optional
+      #- USER=username #optional
+      #- PASS=password #optional
+      #- WHITELIST=iplist #optional
+      #- HOST_WHITELIST=dnsnane list #optional
+    volumes:
+      - ./transmission:/config
+      
+        
+      - /srv/dev-disk-by-uuid-d7ac13bc-1cd8-4f58-bad4-546dbfc62ed2/DiskX:/downloads
+      #- /srv/dev-disk-by-uuid-773f89aa-49b6-42b1-9f72-5813d390f08e/DiskX
+      - ./transmission/watch:/watch
+    ports:
+      - 9091:9091
+      - 51413:51413
+      - 51413:51413/udp
+    restart: unless-stopped   
+    
+    
+  # hassio:
+    # image: homeassistant/amd64-hassio-supervisor
+    # container_name: hassio_supervisor
+    # privileged: true
+    # entrypoint: ["/bin/bash", "-c", "/scripts/start_hassio.sh"]
+    # security_opt:
+      # - seccomp:unconfined
+    # environment:
+      # - HOMEASSISTANT_REPOSITORY=homeassistant/qemux86-64-homeassistant
+      # - SUPERVISOR_SHARE=${SUPERVISOR_SHARE}
+      # - SUPERVISOR_NAME=hassio_supervisor
+      # - DBUS_SYSTEM_BUS_ADDRESS=unix:path=/var/run/dbus/system_bus_socket
+    # volumes:
+    # echo "SUPERVISOR_SHARE=/home/$USER/hassio-config" > .env запустить
+   ## https://github.com/postlund/hassio-compose
+      # - ${SUPERVISOR_SHARE}:/data
+      # - ./hassio-config/scripts:/scripts
+      # - /var/run/docker.sock:/var/run/docker.sock
+      # - /var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket
+      
+      
