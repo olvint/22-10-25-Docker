@@ -1,0 +1,33 @@
+info  2022-10-23 08:12:55: Logging to console and directory: '/app/data/log/2022-10-23.08-12-51' filename: log.txt
+info  2022-10-23 08:12:55: Starting Zigbee2MQTT version 1.22.2 (commit #414c51f)
+info  2022-10-23 08:12:55: Starting zigbee-herdsman (0.13.188)
+info  2022-10-23 08:12:59: zigbee-herdsman started (resumed)
+info  2022-10-23 08:12:59: Coordinator firmware version: '{"meta":{"maintrel":1,"majorrel":2,"minorrel":7,"product":1,"revision":20210319,"transportrev":2},"type":"zStack3x0"}'
+info  2022-10-23 08:12:59: Currently 2 devices are joined:
+info  2022-10-23 08:12:59: Vhod (0x00158d0002b17aca): PECWS01 - Perenio Door sensor (EndDevice)
+info  2022-10-23 08:12:59: Vozduh1 (0x00158d0000dac98c): MCLH-08 - LifeControl Air sensor (EndDevice)
+warn  2022-10-23 08:12:59: `permit_join` set to  `true` in configuration.yaml.
+warn  2022-10-23 08:12:59: Allowing new devices to join.
+warn  2022-10-23 08:12:59: Set `permit_join` to `false` once you joined all devices.
+info  2022-10-23 08:12:59: Zigbee: allowing new devices to join.
+info  2022-10-23 08:12:59: Connecting to MQTT server at mqtt://mosquitto
+info  2022-10-23 08:12:59: Connected to MQTT server
+info  2022-10-23 08:12:59: MQTT publish: topic 'zigbee2mqtt/bridge/state', payload 'online'
+info  2022-10-23 08:12:59: Started frontend on port 0.0.0.0:8080
+info  2022-10-23 08:12:59: MQTT publish: topic 'zigbee2mqtt/Vhod', payload '{"battery":55.5,"battery_low":false,"contact":true,"tamper":false}'
+info  2022-10-23 08:12:59: MQTT publish: topic 'zigbee2mqtt/Vozduh1', payload '{"eco2":687,"humidity":45.2,"temperature":27.54,"voc":43}'
+info  2022-10-23 08:13:50: MQTT publish: topic 'zigbee2mqtt/Vozduh1', payload '{"eco2":693,"humidity":45.11,"linkquality":57,"temperature":27.56,"voc":44}'
+info  2022-10-23 08:15:50: MQTT publish: topic 'zigbee2mqtt/Vozduh1', payload '{"eco2":682,"humidity":45.2,"linkquality":60,"temperature":27.54,"voc":42}'
+info  2022-10-23 08:17:50: MQTT publish: topic 'zigbee2mqtt/Vozduh1', payload '{"eco2":682,"humidity":45.05,"linkquality":60,"temperature":27.56,"voc":42}'
+info  2022-10-23 08:19:50: MQTT publish: topic 'zigbee2mqtt/Vozduh1', payload '{"eco2":682,"humidity":45,"linkquality":57,"temperature":27.54,"voc":42}'
+info  2022-10-23 08:21:51: MQTT publish: topic 'zigbee2mqtt/Vozduh1', payload '{"eco2":676,"humidity":45.07,"linkquality":57,"temperature":27.54,"voc":42}'
+info  2022-10-23 08:23:51: MQTT publish: topic 'zigbee2mqtt/Vozduh1', payload '{"eco2":676,"humidity":45.08,"linkquality":57,"temperature":27.57,"voc":42}'
+info  2022-10-23 08:25:51: MQTT publish: topic 'zigbee2mqtt/Vozduh1', payload '{"eco2":668,"humidity":44.83,"linkquality":63,"temperature":27.56,"voc":40}'
+info  2022-10-23 08:26:51: MQTT publish: topic 'zigbee2mqtt/bridge/event', payload '{"data":{"friendly_name":"Vhod","ieee_address":"0x00158d0002b17aca"},"type":"device_announce"}'
+info  2022-10-23 08:26:53: MQTT publish: topic 'zigbee2mqtt/Vhod', payload '{"battery":55.5,"battery_low":false,"contact":true,"linkquality":96,"tamper":false}'
+info  2022-10-23 08:27:51: MQTT publish: topic 'zigbee2mqtt/Vozduh1', payload '{"eco2":672,"humidity":44.82,"linkquality":57,"temperature":27.59,"voc":41}'
+info  2022-10-23 08:29:51: MQTT publish: topic 'zigbee2mqtt/Vozduh1', payload '{"eco2":665,"humidity":45.08,"linkquality":60,"temperature":27.57,"voc":40}'
+info  2022-10-23 08:30:21: MQTT publish: topic 'zigbee2mqtt/bridge/state', payload 'offline'
+info  2022-10-23 08:30:21: Disconnecting from MQTT server
+info  2022-10-23 08:30:21: Stopping zigbee-herdsman...
+info  2022-10-23 08:30:31: Stopped zigbee-herdsman

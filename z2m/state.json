@@ -1,0 +1,14 @@
+{
+    "0x00158d0002b17aca": {
+        "contact": true,
+        "tamper": false,
+        "battery_low": false,
+        "battery": 55.5
+    },
+    "0x00158d0000dac98c": {
+        "temperature": 27.87,
+        "humidity": 50.88,
+        "eco2": 814,
+        "voc": 63
+    }
+}
